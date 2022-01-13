@@ -8,6 +8,8 @@ SAMBA_LOG_LEVEL=${SAMBA_LOG_LEVEL:-0}
 SAMBA_FOLLOW_SYMLINKS=${SAMBA_FOLLOW_SYMLINKS:-yes}
 SAMBA_WIDE_LINKS=${SAMBA_WIDE_LINKS:-yes}
 SAMBA_HOSTS_ALLOW=${SAMBA_HOSTS_ALLOW:-127.0.0.0/8 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16}
+SAMBA_DISABLE_NETBIOS=${SAMBA_DISABLE_NETBIOS:-yes}
+SAMBA_NETBIOS_NAME=${SAMBA_NETBIOS_NAME:-SMBSERVER}
 #SAMBA_INTERFACES=${SAMBA_INTERFACES:-eth0}
 
 echo "Setting timezone to ${TZ}"
@@ -56,20 +58,24 @@ unix extensions = no
 
 printing = bsd
 printcap name = /dev/null
-disable spoolss = yes
-disable netbios = yes
+disable spoolss = no
+disable netbios = ${SAMBA_DISABLE_NETBIOS}
+netbios name = ${SAMBA_NETBIOS_NAME}
 smb ports = 445
 
 client ipc min protocol = default
 client ipc max protocol = default
 
-;wins support = yes
+ntlm auth = yes
+wins support = yes
+local master = yes
+preferred master = yes
+
 ;wins server = w.x.y.z
 ;wins proxy = yes
 dns proxy = no
 socket options = TCP_NODELAY
 strict locking = no
-local master = no
 
 winbind scan trusted domains = yes
 
@@ -169,5 +175,8 @@ if [[ "$(yq -j e /data/config.yml 2>/dev/null | jq '.share')" != "null" ]]; then
 fi
 
 testparm -s
+
+echo "Executing nmbd to making network discovereable (wsdd - Web Service Discovery). Resource name: " ${SAMBA_NETBIOS_NAME}
+nmbd --no-process-group --configfile /etc/samba/smb.conf
 
 exec "$@"
