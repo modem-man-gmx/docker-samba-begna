@@ -1,20 +1,16 @@
-<p align="center"><a href="https://github.com/crazy-max/docker-samba" target="_blank"><img height="128" src="https://raw.githubusercontent.com/crazy-max/docker-samba/master/.github/docker-samba.jpg"></a></p>
+<p align="center"><a href="https://github.com/Axia-SA/docker-samba" target="_blank"><img height="128" src="https://raw.githubusercontent.com/crazy-max/docker-samba/master/.github/docker-samba.jpg"></a></p>
 
 <p align="center">
-  <a href="https://hub.docker.com/r/crazymax/samba/tags?page=1&ordering=last_updated"><img src="https://img.shields.io/github/v/tag/crazy-max/docker-samba?label=version&style=flat-square" alt="Latest Version"></a>
-  <a href="https://github.com/crazy-max/docker-samba/actions?workflow=build"><img src="https://img.shields.io/github/workflow/status/crazy-max/docker-samba/build?label=build&logo=github&style=flat-square" alt="Build Status"></a>
+  <a href="https://hub.docker.com/r/crazymax/samba/tags?page=1&ordering=last_updated"><img src="https://img.shields.io/github/v/tag/Axia-SA/docker-samba?label=version&style=flat-square" alt="Latest Version"></a>
+  <a href="https://github.com/Axia-SA/docker-samba/actions?workflow=build"><img src="https://img.shields.io/github/workflow/status/crazy-max/docker-samba/build?label=build&logo=github&style=flat-square" alt="Build Status"></a>
   <a href="https://hub.docker.com/r/crazymax/samba/"><img src="https://img.shields.io/docker/stars/crazymax/samba.svg?style=flat-square&logo=docker" alt="Docker Stars"></a>
   <a href="https://hub.docker.com/r/crazymax/samba/"><img src="https://img.shields.io/docker/pulls/crazymax/samba.svg?style=flat-square&logo=docker" alt="Docker Pulls"></a>
-  <br /><a href="https://github.com/sponsors/crazy-max"><img src="https://img.shields.io/badge/sponsor-crazy--max-181717.svg?logo=github&style=flat-square" alt="Become a sponsor"></a>
-  <a href="https://www.paypal.me/crazyws"><img src="https://img.shields.io/badge/donate-paypal-00457c.svg?logo=paypal&style=flat-square" alt="Donate Paypal"></a>
 </p>
 
 ## About
 
-[Samba](https://wiki.samba.org) Docker image based on Alpine Linux.<br />
-If you are interested, [check out](https://hub.docker.com/r/crazymax/) my other Docker images!
+[Samba](https://wiki.samba.org) Docker image based on Alpine Linux and [crazy-max docker-samba repository](https://github.com/Axia-SA/docker-samba).<br />
 
-💡 Want to be notified of new releases? Check out 🔔 [Diun (Docker Image Update Notifier)](https://github.com/crazy-max/diun) project!
 
 ___
 
@@ -39,12 +35,13 @@ ___
 * Multi-platform image
 * Easy [configuration](#configuration) through YAML
 * Improve [operability with Mac OS X clients](https://wiki.samba.org/index.php/Configure_Samba_to_Work_Better_with_Mac_OS_X)
-* Drop support for legacy protocols including NetBIOS, WINS, and Samba port 139
+* This version mantains support for legacy protocols including NetBIOS
+* Drop support for WINS and Samba port 139
 
 ## Build locally
 
 ```shell
-git clone https://github.com/crazy-max/docker-samba.git
+git clone https://github.com/Axia-SA/docker-samba.git
 cd docker-samba
 
 # Build image and output to docker (default)
@@ -87,6 +84,7 @@ Image: crazymax/samba:latest
 * `SAMBA_WIDE_LINKS`: Controls whether or not links in the UNIX file system may be followed by the server. (default `yes`)
 * `SAMBA_HOSTS_ALLOW`: Set of hosts which are permitted to access a service. (default `127.0.0.0/8 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16`)
 * `SAMBA_INTERFACES`: Allows you to override the default network interfaces list.
+* `SAMBA_DISABLE_NETBIOS`: Disable NetBIOS for older connections. Values can be `yes` or `no` (default is `yes`)
 
 > More info: https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html
 
@@ -108,12 +106,10 @@ provide global options and add shares. Here is an example:
 ```yaml
 auth:
   - user: foo
-    group: foo
     uid: 1000
     gid: 1000
     password: bar
   - user: baz
-    group: xxx
     uid: 1100
     gid: 1200
     password_file: /run/secrets/baz_password
@@ -192,8 +188,7 @@ docker-compose exec samba smbstatus
 ## Contributing
 
 Want to contribute? Awesome! The most basic way to show your support is to star the project, or to raise issues. You
-can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/crazy-max) or by making
-a [Paypal donation](https://www.paypal.me/crazyws) to ensure this journey continues indefinitely!
+can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/cristian1604).
 
 Thanks again for your support, it is much appreciated! :pray:
 
