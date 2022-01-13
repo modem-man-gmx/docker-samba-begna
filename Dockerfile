@@ -6,11 +6,13 @@ ENV TZ="UTC"
 
 ARG SAMBA_VERSION
 ARG SAMBA_RELEASE
+
 RUN apk --update --no-cache add \
     bash \
     coreutils \
     jq \
     samba=${SAMBA_VERSION}-r0 \
+    samba-common-tools \
     shadow \
     tzdata \
     yq \
@@ -18,7 +20,7 @@ RUN apk --update --no-cache add \
 
 COPY entrypoint.sh /entrypoint.sh
 
-EXPOSE 445
+EXPOSE 137/udp 138/udp 139/tcp 445/tcp
 
 VOLUME [ "/data" ]
 
