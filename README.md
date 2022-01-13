@@ -1,15 +1,8 @@
-<p align="center"><a href="https://github.com/Axia-SA/docker-samba" target="_blank"><img height="128" src="https://raw.githubusercontent.com/crazy-max/docker-samba/master/.github/docker-samba.jpg"></a></p>
-
-<p align="center">
-  <a href="https://hub.docker.com/r/crazymax/samba/tags?page=1&ordering=last_updated"><img src="https://img.shields.io/github/v/tag/Axia-SA/docker-samba?label=version&style=flat-square" alt="Latest Version"></a>
-  <a href="https://github.com/Axia-SA/docker-samba/actions?workflow=build"><img src="https://img.shields.io/github/workflow/status/crazy-max/docker-samba/build?label=build&logo=github&style=flat-square" alt="Build Status"></a>
-  <a href="https://hub.docker.com/r/crazymax/samba/"><img src="https://img.shields.io/docker/stars/crazymax/samba.svg?style=flat-square&logo=docker" alt="Docker Stars"></a>
-  <a href="https://hub.docker.com/r/crazymax/samba/"><img src="https://img.shields.io/docker/pulls/crazymax/samba.svg?style=flat-square&logo=docker" alt="Docker Pulls"></a>
-</p>
-
+# docker-samba
 ## About
 
-[Samba](https://wiki.samba.org) Docker image based on Alpine Linux and [crazy-max docker-samba repository](https://github.com/Axia-SA/docker-samba).<br />
+[Samba](https://wiki.samba.org) Docker image based on Alpine Linux and [crazy-max docker-samba](https://github.com/Axia-SA/docker-samba) repository.<br />
+This container includes a web service discovery (wsdd, using `smbd`) to make the server discoverable by all Windows PCs on the same workgroup.
 
 
 ___
@@ -32,11 +25,9 @@ ___
 
 ## Features
 
-* Multi-platform image
 * Easy [configuration](#configuration) through YAML
 * Improve [operability with Mac OS X clients](https://wiki.samba.org/index.php/Configure_Samba_to_Work_Better_with_Mac_OS_X)
-* This version mantains support for legacy protocols including NetBIOS
-* Drop support for WINS and Samba port 139
+* This version mantains some support for legacy protocols including NetBIOS
 
 ## Build locally
 
@@ -49,29 +40,6 @@ docker buildx bake
 
 # Build multi-platform image
 docker buildx bake image-all
-```
-
-## Image
-
-| Registry                                                                                         | Image                           |
-|--------------------------------------------------------------------------------------------------|---------------------------------|
-| [Docker Hub](https://hub.docker.com/r/crazymax/samba/)                                           | `crazymax/samba`                |
-| [GitHub Container Registry](https://github.com/users/crazy-max/packages/container/package/samba) | `ghcr.io/crazy-max/samba`       |
-
-Following platforms for this image are available:
-
-```
-$ docker run --rm mplatform/mquery crazymax/samba:latest
-Image: crazymax/samba:latest
- * Manifest List: Yes
- * Supported platforms:
-   - linux/amd64
-   - linux/arm/v6
-   - linux/arm/v7
-   - linux/arm64
-   - linux/386
-   - linux/ppc64le
-   - linux/s390x
 ```
 
 ## Environment variables
@@ -94,7 +62,10 @@ Image: crazymax/samba:latest
 
 ## Ports
 
-* `445`: SMB over TCP port
+* `137/udp`
+* `138/udp`
+* `139/tcp`
+* `445/tcp`: Samba Server
 
 > More info: https://wiki.samba.org/index.php/Samba_NT4_PDC_Port_Usage
 
@@ -140,10 +111,6 @@ More info: https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html#VET
 
 A more complete example is available [here](examples/compose/data/config.yml).
 
-### Add users
-
-## Usage
-
 ### Docker Compose
 
 Docker compose is the recommended way to run this image. Copy the content of folder [examples/compose](examples/compose)
@@ -175,7 +142,6 @@ docker-compose up -d
 ```
 
 ## Notes
-
 ### Status
 
 Use the following commands to check the logs and status:
@@ -187,8 +153,7 @@ docker-compose exec samba smbstatus
 
 ## Contributing
 
-Want to contribute? Awesome! The most basic way to show your support is to star the project, or to raise issues. You
-can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/cristian1604).
+Want to contribute? Awesome! The most basic way to show your support is to star the project, or to raise issues. You can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/cristian1604).
 
 Thanks again for your support, it is much appreciated! :pray:
 
