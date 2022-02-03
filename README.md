@@ -4,6 +4,7 @@
 [Samba](https://wiki.samba.org) Docker image based on Alpine Linux and [crazy-max docker-samba](https://github.com/Axia-SA/docker-samba) repository.<br />
 This container includes a web service discovery (wsdd, using `smbd`) to make the server discoverable by all Windows PCs on the same workgroup.
 
+Instead build from scratch this container, you can pull it from [dockerhub here](https://hub.docker.com/r/cbottazzi/docker-samba)
 
 ___
 
@@ -129,12 +130,12 @@ You can also use the following minimal command:
 ```shell
 docker run -d --network host \
   -v "$(pwd)/data:/data" \
-  --name samba crazymax/samba
+  --name samba cbottazzi/docker-samba
 ```
 
 ## Upgrade
 
-Recreate the container whenever I push an update:
+Recreate the container when exists an update:
 
 ```bash
 docker-compose pull
