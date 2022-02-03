@@ -10,7 +10,6 @@ ___
 
 * [Features](#features)
 * [Build locally](#build-locally)
-* [Image](#image)
 * [Environment variables](#environment-variables)
 * [Volumes](#volumes)
 * [Ports](#ports)
@@ -111,6 +110,8 @@ visible or accessible:
 More info: https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html#VETOFILES
 
 A more complete example is available [here](examples/compose/data/config.yml).
+
+## Usage
 
 ### Docker Compose
 
