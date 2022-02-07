@@ -79,15 +79,6 @@ strict locking = no
 
 winbind scan trusted domains = yes
 
-vfs objects = fruit streams_xattr
-fruit:metadata = stream
-fruit:model = MacSamba
-fruit:posix_rename = yes
-fruit:veto_appledouble = no
-fruit:wipe_intentionally_left_blank_rfork = yes
-fruit:delete_empty_adfiles = yes
-fruit:time machine = yes
-
 EOL
 
 if [ -n "${SAMBA_INTERFACES}" ]; then
