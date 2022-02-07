@@ -174,6 +174,18 @@ if [[ "$(yq -j e /data/config.yml 2>/dev/null | jq '.share')" != "null" ]]; then
   done
 fi
 
+# -----------------------------------------------
+echo "Recovery previous passdb.tdb database if exists"
+FILE=/data/passdb.tdb
+if test -f "$FILE"; then
+    echo "$FILE exists. Start recovery..."
+    cp /data/passdb.tdb /data/lib/private/passdb.tdb
+else 
+    echo "$FILE does not exist. Skipping."
+fi
+
+# -----------------------------------------------
+
 testparm -s
 
 echo "Executing nmbd to making network discovereable (wsdd - Web Service Discovery). Resource name: " ${SAMBA_NETBIOS_NAME}
