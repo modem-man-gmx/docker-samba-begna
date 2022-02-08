@@ -4,7 +4,7 @@
 [Samba](https://wiki.samba.org) Docker image based on Alpine Linux and [crazy-max docker-samba](https://github.com/Axia-SA/docker-samba) repository.<br />
 This container includes a web service discovery (wsdd, using `smbd`) to make the server discoverable by all Windows PCs on the same workgroup. Also, can recover custom user settings and passwords from samba TDB files (**T**rivial **D**ata**B**ase).
 
-Instead build from scratch this container, you can pull it from [dockerhub here](https://hub.docker.com/r/cbottazzi/docker-samba)
+Instead build from scratch this container, you can pull it from [docker hub](https://hub.docker.com/r/cbottazzi/docker-samba) or download only the `docker-compose.yml` and the `config.yml` file on [examples/compose/](examples/compose/data/config.yml).
 
 ___
 
@@ -14,6 +14,7 @@ ___
 * [Volumes](#volumes)
 * [Ports](#ports)
 * [Configuration](#configuration)
+* [Import custom user passwords and preferences](#import-custom-user-passwords-and-preferences)
 * [Usage](#usage)
   * [Docker Compose](#docker-compose)
   * [Command line](#command-line)
