@@ -2,16 +2,18 @@ version: "3.5"
 
 services:
   samba:
-    image: crazymax/samba
+    image: cbottazzi/docker-samba:latest
     container_name: samba
     network_mode: host
     volumes:
-      - "./data:/data"
-      - "./public:/samba/public"
-      - "./share:/samba/share"
-      - "./foo:/samba/foo"
-      - "./foo-baz:/samba/foo-baz"
+      - "/path/to/data:/data"
+      - "/path/to/share:/share"
     environment:
-      - "TZ=Europe/Paris"
+      - "TZ=America/Argentina/Buenos_Aires"
       - "SAMBA_LOG_LEVEL=0"
-    restart: always
+      - "SAMBA_WORKGROUP=WORKGROUP"
+      - "SAMBA_SERVER_STRING=Docker Samba Server"
+      - "SAMBA_HOSTS_ALLOW=127.0.0.1 192.168.100.0/24"
+      - "SAMBA_DISABLE_NETBIOS=no"
+      - "SAMBA_NETBIOS_NAME=LINUXSERVER"
+    restart: unless-stopped
