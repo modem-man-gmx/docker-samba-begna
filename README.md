@@ -2,7 +2,7 @@
 ## About
 
 [Samba](https://wiki.samba.org) Docker image based on Alpine Linux and [crazy-max docker-samba](https://github.com/Axia-SA/docker-samba) repository.<br />
-This container includes a web service discovery (wsdd, using `smbd`) to make the server discoverable by all Windows PCs on the same workgroup.
+This container includes a web service discovery (wsdd, using `smbd`) to make the server discoverable by all Windows PCs on the same workgroup. Also, can recover custom user settings and passwords from samba TDB files (**T**rivial **D**ata**B**ase).
 
 Instead build from scratch this container, you can pull it from [dockerhub here](https://hub.docker.com/r/cbottazzi/docker-samba)
 
@@ -28,6 +28,7 @@ ___
 * Easy [configuration](#configuration) through YAML
 * Improve [operability with Mac OS X clients](https://wiki.samba.org/index.php/Configure_Samba_to_Work_Better_with_Mac_OS_X)
 * This version mantains some support for legacy protocols including NetBIOS
+* Backup and restore custom user passwords and settings
 
 ## Build locally
 
@@ -62,10 +63,10 @@ docker buildx bake image-all
 
 ## Ports
 
-* `137/udp`
-* `138/udp`
-* `139/tcp`
-* `445/tcp`: Samba Server
+* `137/udp`: NetBIOS Name Service
+* `138/udp`: NetBIOS Datagram
+* `139/tcp`: NetBIOS Session
+* `445/tcp`: Samba Server over TCP
 
 > More info: https://wiki.samba.org/index.php/Samba_NT4_PDC_Port_Usage
 
@@ -110,6 +111,14 @@ visible or accessible:
 More info: https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html#VETOFILES
 
 A more complete example is available [here](examples/compose/data/config.yml).
+
+## Import custom user passwords and preferences
+
+You can also use an existing TDB files to import previous custom settings like encrypted passwords that can not be stored on files under the `password_file` parameter on `config.yml`.
+
+To achieve this, put the `passdb.tdb` and `secrets.tdb` files (or any `*.tdb` files) on `config/`. This files will be imported while the container is being building.
+
+> Notice: TDB files must be consistent with `config.yml` file to work properly
 
 ## Usage
 
