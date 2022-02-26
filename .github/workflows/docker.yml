@@ -24,7 +24,7 @@ jobs:
         with:
           images: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}
           flavor: |
-            latest=auto
+            latest=true
           tags: |
             type=schedule
             type=ref,event=branch
