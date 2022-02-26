@@ -8,21 +8,23 @@ Instead build from scratch this container, you can pull it from [docker hub](htt
 
 ___
 
-* [Features](#features)
-* [Build locally](#build-locally)
-* [Environment variables](#environment-variables)
-* [Volumes](#volumes)
-* [Ports](#ports)
-* [Configuration](#configuration)
-* [Import custom user passwords and preferences](#import-custom-user-passwords-and-preferences)
-* [Usage](#usage)
-  * [Docker Compose](#docker-compose)
-  * [Command line](#command-line)
-* [Notes](#notes)
-  * [Status](#status)
-* [Upgrade](#upgrade)
-* [Contributing](#contributing)
-* [License](#license)
+- [docker-samba](#docker-samba)
+  - [About](#about)
+  - [Features](#features)
+  - [Build locally](#build-locally)
+  - [Environment variables](#environment-variables)
+  - [Volumes](#volumes)
+  - [Ports](#ports)
+  - [Configuration](#configuration)
+  - [Import custom user passwords and preferences](#import-custom-user-passwords-and-preferences)
+  - [Usage](#usage)
+    - [Docker Compose](#docker-compose)
+    - [Command line](#command-line)
+  - [Upgrade](#upgrade)
+  - [Notes](#notes)
+    - [Status](#status)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Features
 
@@ -55,7 +57,10 @@ docker buildx bake image-all
 * `SAMBA_HOSTS_ALLOW`: Set of hosts which are permitted to access a service. (default `127.0.0.0/8 10.0.0.0/8 172.16.0.0/12 192.168.0.0/16`)
 * `SAMBA_INTERFACES`: Allows you to override the default network interfaces list.
 * `SAMBA_DISABLE_NETBIOS`: Disable NetBIOS for older connections. Values can be `yes` or `no` (default is `yes`)
-
+* `SAMBA_CREATE_MASK`: Allows override of the default file permissions mask (default 0664)
+* `SAMBA_FORCE_CREATE_MODE`: Forces override of the default file permissions mask (default 0664)
+* `SAMBA_DIRECTORY_MASK`: Allows override of the default directory permissions mask (default 0775)
+* `SAMBA_FORCE_DIRECTORY_MODE`: Forces override of the default directory permissions mask (default 0775)
 > More info: https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html
 
 ## Volumes

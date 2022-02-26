@@ -11,6 +11,10 @@ SAMBA_HOSTS_ALLOW=${SAMBA_HOSTS_ALLOW:-127.0.0.0/8 10.0.0.0/8 172.16.0.0/12 192.
 SAMBA_DISABLE_NETBIOS=${SAMBA_DISABLE_NETBIOS:-yes}
 SAMBA_NETBIOS_NAME=${SAMBA_NETBIOS_NAME:-SMBSERVER}
 #SAMBA_INTERFACES=${SAMBA_INTERFACES:-eth0}
+SAMBA_CREATE_MASK=${SAMBA_CREATE_MASK:-0664}
+SAMBA_FORCE_CREATE_MODE=${SAMBA_FORCE_CREATE_MODE:-0664}
+SAMBA_DIRECTORY_MASK=${SAMBA_DIRECTORY_MASK:-0775}
+SAMBA_FORCE_DIRECTORY_MODE=${SAMBA_DIRECTORY_MASK:-0775}
 
 echo "Setting timezone to ${TZ}"
 ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime
@@ -48,10 +52,10 @@ pam password change = yes
 map to guest = bad user
 usershare allow guests = yes
 
-create mask = 0664
-force create mode = 0664
-directory mask = 0775
-force directory mode = 0775
+create mask = ${SAMBA_CREATE_MASK)
+force create mode = ${SAMBA_FORCE_CREATE_MODE}
+directory mask = ${SAMBA_DIRECTORY_MASK}
+force directory mode = ${SAMBA_DIRECTORY_MASK}
 follow symlinks = ${SAMBA_FOLLOW_SYMLINKS}
 wide links = ${SAMBA_WIDE_LINKS}
 unix extensions = no
