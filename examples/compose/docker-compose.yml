@@ -2,18 +2,22 @@ version: "3.5"
 
 services:
   samba:
-    image: cbottazzi/docker-samba:latest
+    image: begna112/docker-samba:latest
     container_name: samba
     network_mode: host
     volumes:
-      - "/path/to/data:/data"
-      - "/path/to/share:/share"
+      - /path/to/data:/data
+      - /path/to/share:/share
     environment:
-      - "TZ=America/Argentina/Buenos_Aires"
-      - "SAMBA_LOG_LEVEL=0"
-      - "SAMBA_WORKGROUP=WORKGROUP"
-      - "SAMBA_SERVER_STRING=Docker Samba Server"
-      - "SAMBA_HOSTS_ALLOW=127.0.0.1 192.168.100.0/24"
-      - "SAMBA_DISABLE_NETBIOS=no"
-      - "SAMBA_NETBIOS_NAME=LINUXSERVER"
+      - TZ=America/Argentina/Buenos_Aires
+      - SAMBA_LOG_LEVEL=0
+      - SAMBA_WORKGROUP=WORKGROUP
+      - SAMBA_SERVER_STRING=Docker Samba Server
+      - SAMBA_HOSTS_ALLOW=127.0.0.1 192.168.100.0/24
+      - SAMBA_DISABLE_NETBIOS=no
+      - SAMBA_NETBIOS_NAME=LINUXSERVER
+      - SAMBA_CREATE_MASK=0775
+      - SAMBA_FORCE_CREATE_MODE=0775
+      - SAMBA_DIRECTORY_MASK=0775
+      - SAMBA_FORCE_DIRECTORY_MODE=0775
     restart: unless-stopped

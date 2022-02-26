@@ -1,10 +1,10 @@
 # docker-samba
 ## About
 
-[Samba](https://wiki.samba.org) Docker image based on Alpine Linux and [crazy-max docker-samba](https://github.com/Axia-SA/docker-samba) repository.<br />
+[Samba](https://wiki.samba.org) Docker image based on Alpine Linux and [crazy-max docker-samba](https://github.com/crazy-max/docker-samba) repository.<br />
 This container includes a web service discovery (wsdd, using `smbd`) to make the server discoverable by all Windows PCs on the same workgroup. Also, can recover custom user settings and passwords from samba TDB files (**T**rivial **D**ata**B**ase).
 
-Instead build from scratch this container, you can pull it from [docker hub](https://hub.docker.com/r/cbottazzi/docker-samba) or download only the `docker-compose.yml` and the `config.yml` file on [examples/compose/](examples/compose/data/config.yml).
+Instead build from scratch this container, you can pull it from [docker hub](https://hub.docker.com/r/begna112/docker-samba) or download only the `docker-compose.yml` and the `config.yml` file on [examples/compose/](examples/compose/data/config.yml).
 
 ___
 
@@ -122,7 +122,7 @@ A more complete example is available [here](examples/compose/data/config.yml).
 
 You can also use an existing TDB files to import previous custom settings like encrypted passwords that can not be stored on files under the `password_file` parameter on `config.yml`.
 
-To achieve this, put the `passdb.tdb` and `secrets.tdb` files (or any `*.tdb` files) on `config/`. This files will be imported while the container is being building.
+To achieve this, put the `passdb.tdb` and `secrets.tdb` files (or any `*.tdb` files) on `config/`. This files will be imported while the container is being built.
 
 > Notice: TDB files must be consistent with `config.yml` file to work properly
 
@@ -170,7 +170,7 @@ docker-compose exec samba smbstatus
 
 ## Contributing
 
-Want to contribute? Awesome! The most basic way to show your support is to star the project, or to raise issues. You can also support this project by [**becoming a sponsor on GitHub**](https://github.com/sponsors/cristian1604).
+Want to contribute? Awesome! The most basic way to show your support is to star the project, or to raise issues.
 
 Thanks again for your support, it is much appreciated! :pray:
 
