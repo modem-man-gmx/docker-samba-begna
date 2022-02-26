@@ -23,6 +23,8 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}
+          flavor: |
+            latest=auto
           tags: |
             type=schedule
             type=ref,event=branch
