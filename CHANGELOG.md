@@ -1,9 +1,9 @@
 # Changelog
 
-## 4.15.2-r2 (2022/01/10)
+## 4.16.7-r0 (2022/12/14)
 
-* Fix interfaces limitation (#15)
-* Update example (#16)
+* Samba 4.16.7
+* Alpine Linux 3.17
 
 ## 4.15.2-r1 (2020/12/18)
 
