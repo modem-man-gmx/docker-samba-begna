@@ -1,4 +1,4 @@
-version: "3.5"
+# version is no longer supported by docker in 2024 #  version: "3.5"
 
 services:
   samba:
@@ -6,18 +6,22 @@ services:
     container_name: samba
     network_mode: host
     volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
       - /path/to/data:/data
       - /path/to/share:/share
     environment:
-      - TZ=America/Argentina/Buenos_Aires
+      - USER_UID=$(id -u)
+      - USER_GID=$(id -g)
+      - TZ=${TZ:-CET-1CEST,M3.5.0,M10.5.0/3}
       - SAMBA_LOG_LEVEL=0
       - SAMBA_WORKGROUP=WORKGROUP
       - SAMBA_SERVER_STRING=Docker Samba Server
-      - SAMBA_HOSTS_ALLOW=127.0.0.1 192.168.100.0/24
+      - SAMBA_HOSTS_ALLOW=127.0.0.1 192.168.0.0/17
       - SAMBA_DISABLE_NETBIOS=no
-      - SAMBA_NETBIOS_NAME=LINUXSERVER
-      - SAMBA_CREATE_MASK=0775
-      - SAMBA_FORCE_CREATE_MODE=0775
+      - SAMBA_NETBIOS_NAME=FILESERVER
+      - SAMBA_CREATE_MASK=0664
+      - SAMBA_FORCE_CREATE_MODE=0664
       - SAMBA_DIRECTORY_MASK=0775
       - SAMBA_FORCE_DIRECTORY_MODE=0775
     restart: unless-stopped
